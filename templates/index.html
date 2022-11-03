@@ -6,21 +6,37 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Url shortner</title>
     <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+    <link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
 </head>
-<body>
-    <div align="center">
-    <main>
-    <h1>Url Shortner</h1>
-    <form id="post-form">
-        {% csrf_token %}
-        <label for="url">url</label>
-        <input type="text" name="link" id="link" placeholder="Enter url">
-        <button type="submit" id="shorten">Submit</button>
-    </form>
+<body class="p-3 mb-2 bg-primary text-black">
+    <div class="container p-1 mb-1 bg-primary.bg-gradient" style="font-family: Poppins;"    >
+        <div class="p-3 mb-2 bg-secondary.bg-gradient text-white">
+            <h1 class="fs-1 text-center">Url Shortner</h1>
+        </div>
+        <div class="card text-center mx-auto w-100 p-3">
+            <div class="card-header fs-3 text-bg-dark">URL BOX</div>
+            <div class="card-body">
+                <form id="post-form">
+                    {% csrf_token %}
+                    <div class="mb-3">
+                        
+                        <input type="text" class="form-control" aria-describedby="url-help" id="link" name="link">
+                        <div id="url-help" class="form-text">Enter the url you want to shorten!</div>
 
-    <h2 align="center">Link</h2>
-    </main>
-</div>
+                    </div>
+                    <br />
+                    <button type="submit" id="shorten" class="btn btn-primary">Shorten</button>
+                </form>
+                <br />
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="link-success">Link will appear here</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <script type="text/javascript">
         $(document).on('submit','#post-form',function(e){
@@ -34,9 +50,9 @@
                     csrfmiddlewaretoken:$('input[name=csrfmiddlewaretoken]').val(),
                 },
                 success: function(data){
-                    $('h2').html("localhost:8000/"+data)
+                    $('h4').html("localhost:8000/"+data)
                 }
-            });
+             });
         });
     </script>
 </body>
